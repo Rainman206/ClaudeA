@@ -63,10 +63,21 @@ equipment — but the current build intentionally avoids any real imagery.
 
 ```bash
 npm install
-npm run dev        # http://127.0.0.1:5173
-npm run build      # -> dist/
-npm run preview    # serves dist/
+npm run dev            # http://127.0.0.1:5173
+npm run build          # standard multi-file build -> dist/
+npm run build:single   # single-file build -> dist/index.html
+                       #   then copied to ../asbury-park-brewery-v1.html
+                       #   (named to avoid collision with mountain-king-v2.html
+                       #    at the repo root)
+npm run preview        # serves dist/
 ```
+
+### Single-file preview
+
+`asbury-park-brewery-v1.html` at the repo root is a fully self-contained HTML
+file &mdash; CSS, JS, and markup inlined &mdash; so it can be opened directly
+in a browser or dropped into any static host without a build step. It sits
+alongside `mountain-king-v2.html` under a distinct name on purpose.
 
 ## Deploy (Netlify)
 
