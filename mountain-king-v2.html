@@ -658,17 +658,66 @@ nav.scrolled {
   background-position: center center;
   background-blend-mode: multiply;
   color: var(--ink);
-  padding: 6rem 0;
+  padding: 7rem 0;
   position: relative;
   overflow: hidden;
+}
+/* Oversized background type for the story section */
+.story-section::after {
+  content: 'CAVE MTN';
+  position: absolute;
+  top: -0.1em;
+  right: -0.05em;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144, 'SOFT' 80;
+  font-size: clamp(12rem, 22vw, 30rem);
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(28, 34, 33, 0.06);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .story-grid {
   position: relative;
+  z-index: 1;
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 5rem;
-  align-items: center;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Timeline markers */
+.story-timeline {
+  display: flex;
+  gap: 1.5rem;
+  margin: 2.5rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(28, 34, 33, 0.15);
+  border-bottom: 1px solid rgba(28, 34, 33, 0.15);
+}
+.story-timeline-item {
+  flex: 1;
+}
+.story-timeline-year {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-variation-settings: 'opsz' 144, 'SOFT' 70;
+  font-size: 1.8rem;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.35rem;
+}
+.story-timeline-desc {
+  font-family: var(--f-sans);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
 }
 
 .story-body {
@@ -824,7 +873,7 @@ nav.scrolled {
   position: relative;
   aspect-ratio: 3 / 4;
   overflow: hidden;
-  border-radius: 2px;
+  /* hard edges — no border-radius */
   cursor: pointer;
   transition: transform 0.45s ease;
   background: var(--ink-soft);
@@ -960,35 +1009,41 @@ nav.scrolled {
   flex-wrap: wrap;
 }
 
-.beers-filter {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-.filter-btn {
-  font-family: var(--f-sans);
-  font-weight: 600;
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+.beers-count {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
   color: var(--text-dim);
-  background: transparent;
-  border: 1px solid rgba(239, 228, 203, 0.2);
-  padding: 0.55rem 1.1rem;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.filter-btn:hover,
-.filter-btn.active {
-  color: var(--ink);
-  background: var(--mustard);
-  border-color: var(--mustard);
+  letter-spacing: 0.1em;
 }
 
 .beers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.75rem;
+}
+
+/* Beer label image on cards */
+.beer-label {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45%;
+  height: 80%;
+  object-fit: contain;
+  object-position: bottom right;
+  opacity: 0.2;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.4s, transform 0.5s;
+}
+.beer-card:hover .beer-label {
+  opacity: 0.35;
+  transform: translateY(-4px) rotate(-1deg);
+}
+.beer-card.featured .beer-label {
+  width: 40%;
+  opacity: 0.25;
 }
 
 .beer-card {
@@ -999,7 +1054,7 @@ nav.scrolled {
   background: var(--bg);
   color: var(--fg);
   padding: 2rem 1.75rem 1.75rem;
-  border-radius: 2px;
+  /* hard edges — no border-radius */
   box-shadow:
     0 1px 0 rgba(0,0,0,0.1),
     0 18px 38px rgba(0,0,0,0.35);
@@ -1320,49 +1375,47 @@ nav.scrolled {
 }
 .directions-btn:hover { background: var(--rust); transform: translateY(-1px); }
 
+/* Chalkboard-style feature list */
 .taproom-features {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+  background: var(--ink);
+  color: var(--parchment);
+  padding: 2.5rem;
+  position: relative;
+}
+.taproom-features::before {
+  content: 'WHAT TO EXPECT';
+  display: block;
+  font-family: var(--f-sans);
+  font-weight: 700;
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--mustard);
+  margin-bottom: 1.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
 }
 .taproom-feature {
-  display: flex;
-  gap: 1.2rem;
-  align-items: flex-start;
-  padding: 1.25rem;
-  background: rgba(239, 228, 203, 0.55);
-  border: 1px solid rgba(28, 34, 33, 0.12);
-  transition: background 0.25s, transform 0.25s;
+  padding: 1rem 0;
+  border-bottom: 1px dashed rgba(239, 228, 203, 0.12);
 }
-.taproom-feature:hover {
-  background: var(--parchment-lt);
-  transform: translateX(4px);
-}
-.taproom-icon {
-  width: 46px; height: 46px;
-  flex-shrink: 0;
-  background: var(--teal-deep);
-  color: var(--mustard);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.35rem;
-}
+.taproom-feature:last-child { border-bottom: none; }
 .taproom-feature-title {
   font-family: var(--f-display);
   font-weight: 900;
-  font-variation-settings: 'opsz' 144, 'SOFT' 50;
-  font-size: 1rem;
+  font-variation-settings: 'opsz' 144, 'SOFT' 70;
+  font-size: 1.15rem;
   text-transform: uppercase;
-  color: var(--ink);
+  color: var(--parchment);
   margin-bottom: 0.3rem;
-  letter-spacing: -0.005em;
+  letter-spacing: -0.02em;
 }
 .taproom-feature-body {
   font-family: var(--f-sans);
-  font-size: 0.92rem;
-  line-height: 1.5;
-  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-dim);
+  max-width: 50ch;
 }
 
 /* ─────────────────────────────────────────
@@ -1576,14 +1629,12 @@ footer {
   border-bottom: 1px solid var(--rule);
   margin-bottom: 2rem;
 }
-.footer-logo {
+.footer-logo-img {
   width: 180px;
-  aspect-ratio: 1 / 1;
-  background-image: var(--img-wordmark);
-  background-size: contain;
-  background-position: left center;
-  background-repeat: no-repeat;
+  height: auto;
   margin-bottom: 1.25rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
 }
 .footer-tagline {
   font-family: var(--f-italic);
@@ -1662,6 +1713,21 @@ footer {
   max-width: 420px;
   text-align: right;
   line-height: 1.55;
+}
+
+/* Pine silhouette divider */
+.pine-divider {
+  background: var(--ink);
+  padding: 0;
+  margin: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.pine-divider img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0) invert(0.08);
 }
 
 /* Fade-up on scroll */
@@ -1795,17 +1861,32 @@ footer {
   <div class="wrap">
     <div class="story-grid">
       <div>
-        <div class="eyebrow dark fade-up">Our Story</div>
+        <div class="eyebrow dark fade-up">The Story</div>
         <h2 class="section-title dark fade-up">Born on<br><em>Cave Mountain</em></h2>
 
         <div class="story-pullquote fade-up">
-          "There is a bear that lives behind our house on Cave Mountain."
+          "There is a bear that lives behind our house on Cave Mountain. Our daughters call him the Mountain King."
         </div>
 
         <div class="story-body fade-up">
-          <p>It started with a bear and two kids. The founder's daughters named the bear that lived on the mountain behind their Windham home <strong>the Mountain King</strong> — and when it came time to build a brewery, there was never any question what to call it.</p>
-          <p>We're a family-run operation tucked into the base of the Catskills, minutes from the ski slopes and steps from the trail. Every beer we brew is tied to this place: the <strong>Batavia Kill</strong> that feeds our water, the peaks our regulars hike on weekends, the seasons that change the mountain outside our window.</p>
-          <p>If you came for a craft-beer tour and left with a story about a bear, we did our job.</p>
+          <p>It started with a black bear and two little girls. The Dorans' daughters spotted him behind their house on Cave Mountain Road in Windham — big, unhurried, crowned by the hemlocks. They named him <strong>the Mountain King</strong>. When the family opened a brewery on Main Street in 2022, the name was never a question.</p>
+          <p>We're a family operation at <strong>5351 Main Street</strong>, four minutes from the Windham Mountain base lodge and a half-mile from the Elm Ridge trailhead. The <strong>Batavia Kill</strong> runs through our backyard. Every beer is tied to this place — the water, the peaks, the seasons that turn the mountain outside our taproom window.</p>
+          <p>Come for the beer. Stay for the story about the bear.</p>
+        </div>
+
+        <div class="story-timeline fade-up">
+          <div class="story-timeline-item">
+            <div class="story-timeline-year">2020</div>
+            <div class="story-timeline-desc">The bear appears on Cave Mountain. The girls name him.</div>
+          </div>
+          <div class="story-timeline-item">
+            <div class="story-timeline-year">2022</div>
+            <div class="story-timeline-desc">Brewery opens on Main Street, Windham.</div>
+          </div>
+          <div class="story-timeline-item">
+            <div class="story-timeline-year">2024</div>
+            <div class="story-timeline-desc">10 beers on tap. The King still reigns.</div>
+          </div>
         </div>
       </div>
 
@@ -1815,15 +1896,20 @@ footer {
           <div class="postcard-inner">
             <div class="postcard-header">Greetings from Windham, New York · Catskill Mountains</div>
             <div class="postcard-body">
-              The mountain is quiet this morning. The King was spotted near Cave Mountain again at dawn — crown gleaming, eyes fierce, unbothered by the hikers. The new batch is cold and ready. Come find us on Main Street. The fire is on, the dogs are welcome, and the King reigns as always.
+              The mountain is quiet this morning. The King was spotted near Cave Mountain again at dawn — crown gleaming, unbothered. The new batch is cold and ready. Come find us on Main Street. The fire is on, the dogs are welcome, and the King reigns as always.
             </div>
-            <div class="postcard-sig">— Mountain King Brewing Co.<br>5351 Main Street · Windham, NY</div>
+            <div class="postcard-sig">— The Doran Family<br>Mountain King Brewing Co.</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- PINE DIVIDER -->
+<div class="pine-divider" aria-hidden="true">
+  <img src="assets/mountain_king_assets/illustrations/pine_silhouette.svg" alt="">
+</div>
 
 <!-- SEASONS -->
 <section class="seasons-section" id="seasons">
@@ -1892,13 +1978,7 @@ footer {
         <div class="eyebrow">The Lineup</div>
         <h2 class="section-title">Every Can<br><em>Earns Its Name</em></h2>
       </div>
-      <div class="beers-filter fade-up stagger-2">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">IPA</button>
-        <button class="filter-btn">Lager</button>
-        <button class="filter-btn">Sour</button>
-        <button class="filter-btn">Seasonal</button>
-      </div>
+      <div class="beers-count fade-up stagger-2">10 beers · brewed in Windham</div>
     </div>
 
     <div class="beers-grid">
@@ -1906,6 +1986,7 @@ footer {
       <!-- Featured: Cocaine Bear -->
       <div class="beer-card b-cocaine featured fade-up">
         <div class="beer-illo honeybear" aria-hidden="true"></div>
+        <img class="beer-label" src="assets/mountain_king_assets/labels/cocaine_bear.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -1922,6 +2003,7 @@ footer {
 
       <!-- Sunshine Wheat -->
       <div class="beer-card b-sunshine fade-up stagger-1">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/sunshine_wheat.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -1937,6 +2019,7 @@ footer {
 
       <!-- Peaches & Cream -->
       <div class="beer-card b-peaches fade-up stagger-2">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/peaches_and_cream.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -1952,6 +2035,7 @@ footer {
 
       <!-- Blackbeary -->
       <div class="beer-card b-blackbeary fade-up stagger-1">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/blackbeary_ale.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -1968,6 +2052,7 @@ footer {
       <!-- Hive Heist -->
       <div class="beer-card b-hive fade-up stagger-2">
         <div class="beer-illo beehive" aria-hidden="true"></div>
+        <img class="beer-label" src="assets/mountain_king_assets/labels/hive_heist.jpg" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -1983,6 +2068,7 @@ footer {
 
       <!-- Big Hollow -->
       <div class="beer-card b-bighollow fade-up stagger-3">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/big_hollow_v2.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -1998,6 +2084,7 @@ footer {
 
       <!-- Batavia Pils -->
       <div class="beer-card b-batavia fade-up stagger-1">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/batavia_pils.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -2013,6 +2100,7 @@ footer {
 
       <!-- Burnt Knob Porter -->
       <div class="beer-card b-burntknob fade-up stagger-2">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/burnt_knob_porter.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -2028,6 +2116,7 @@ footer {
 
       <!-- Oktoberfest -->
       <div class="beer-card b-oktoberfest fade-up stagger-3">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/oktoberfest_v2.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -2043,6 +2132,7 @@ footer {
 
       <!-- Winter Lager -->
       <div class="beer-card b-winter fade-up stagger-4">
+        <img class="beer-label" src="assets/mountain_king_assets/labels/winter_lager.png" alt="" loading="lazy">
         <div class="beer-card-top">
           <svg class="beer-crown" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 40 L10 22 L20 30 L30 14 L40 30 L50 22 L50 40 Z"/>
@@ -2117,32 +2207,20 @@ footer {
 
       <div class="taproom-features fade-up stagger-2">
         <div class="taproom-feature">
-          <div class="taproom-icon">⛰</div>
-          <div>
-            <div class="taproom-feature-title">Four Minutes from the Lift</div>
-            <div class="taproom-feature-body">Boots off, pint in hand, before your legs remember how tired they are. The best après-ski in the Catskills, guaranteed.</div>
-          </div>
+          <div class="taproom-feature-title">Four minutes from the lift</div>
+          <div class="taproom-feature-body">Boots off, pint in hand, before your legs remember how tired they are.</div>
         </div>
         <div class="taproom-feature">
-          <div class="taproom-icon">♪</div>
-          <div>
-            <div class="taproom-feature-title">Live Music Every Weekend</div>
-            <div class="taproom-feature-body">Local acoustic sets Friday and Saturday nights. Rotating artists. No cover, just cold beer.</div>
-          </div>
+          <div class="taproom-feature-title">Live music Fri &amp; Sat</div>
+          <div class="taproom-feature-body">Local acoustic sets. Rotating artists. No cover.</div>
         </div>
         <div class="taproom-feature">
-          <div class="taproom-icon">🐾</div>
-          <div>
-            <div class="taproom-feature-title">Trail Dogs Welcome</div>
-            <div class="taproom-feature-body">Bring your trail companions — wet fur, muddy paws, and all. The King welcomes all animals to his domain.</div>
-          </div>
+          <div class="taproom-feature-title">Trail dogs welcome</div>
+          <div class="taproom-feature-body">Wet fur, muddy paws, all of it. The King doesn't judge.</div>
         </div>
         <div class="taproom-feature">
-          <div class="taproom-icon">✦</div>
-          <div>
-            <div class="taproom-feature-title">The Full Draft List</div>
-            <div class="taproom-feature-body">Every Mountain King beer on draft plus rotating seasonal releases, taproom-only collabs, and one-offs you won't find anywhere else.</div>
-          </div>
+          <div class="taproom-feature-title">Full draft list + one-offs</div>
+          <div class="taproom-feature-body">Every Mountain King beer on tap plus taproom-only collabs and seasonal releases you won't find anywhere else.</div>
         </div>
       </div>
     </div>
@@ -2206,7 +2284,7 @@ footer {
   <div class="wrap">
     <div class="footer-inner">
       <div>
-        <div class="footer-logo" aria-label="Mountain King"></div>
+        <img src="assets/mountain_king_assets/logos/full_logo_color.svg" alt="Mountain King Brewing Company" class="footer-logo-img" loading="lazy">
         <div class="footer-tagline">"There is a bear that lives behind our house on Cave Mountain. Our daughters call him the Mountain King."</div>
         <div class="footer-social">
           <a href="https://www.instagram.com/mountainkingbrewing" target="_blank" class="social-link">IG</a>
@@ -2265,12 +2343,7 @@ footer {
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-  });
+  // Filter buttons removed — beer grid shows all
 </script>
 </body>
 </html>
