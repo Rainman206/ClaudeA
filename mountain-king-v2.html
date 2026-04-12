@@ -1261,12 +1261,23 @@ body::after {
   overflow: hidden;
 }
 
+.taproom-header {
+  position: relative;
+  margin-bottom: 3.5rem;
+  max-width: 780px;
+}
+
 .taproom-grid {
   position: relative;
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 5rem;
-  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+.taproom-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .taproom-intro {
@@ -1275,17 +1286,42 @@ body::after {
   font-size: 1.15rem;
   line-height: 1.6;
   color: var(--ink-soft);
-  margin: 1.5rem 0 2.5rem;
+  margin: 1.5rem 0 0;
   max-width: 520px;
 }
 
 .drive-times {
+  background: var(--parchment-lt);
+  border: 1px solid rgba(28, 34, 33, 0.15);
+  padding: 2.25rem;
   display: flex;
+  flex-direction: column;
   gap: 1.5rem;
-  margin: 0 0 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px dashed rgba(28, 34, 33, 0.25);
-  flex-wrap: wrap;
+  margin: 0;
+  height: 100%;
+  box-shadow: 0 12px 32px rgba(28, 34, 33, 0.18);
+  position: relative;
+}
+.drive-times::before {
+  content: 'HOW TO GET HERE';
+  position: absolute;
+  top: -0.7rem;
+  left: 2rem;
+  background: var(--teal-deep);
+  color: var(--parchment);
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  padding: 0.38rem 0.75rem;
+}
+.drive-time {
+  padding-bottom: 1.25rem;
+  border-bottom: 1px dashed rgba(28, 34, 33, 0.2);
+}
+.drive-time:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
 }
 .drive-time {
   font-family: var(--f-sans);
@@ -1319,6 +1355,9 @@ body::after {
   padding: 2.25rem;
   position: relative;
   box-shadow: 0 12px 32px rgba(28, 34, 33, 0.18);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .hours-card::before {
   content: 'OPEN · POUR · STAY';
@@ -1367,8 +1406,8 @@ body::after {
 .hours-closed { color: rgba(28,34,33,0.4) !important; font-style: italic; }
 
 .address-block {
-  margin-top: 1.75rem;
-  padding-top: 1.75rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
   border-top: 1px solid rgba(28, 34, 33, 0.2);
 }
 .address-label {
@@ -1418,6 +1457,9 @@ body::after {
   color: var(--parchment);
   padding: 2.5rem;
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .taproom-features::before {
   content: 'WHAT TO EXPECT';
@@ -1886,7 +1928,9 @@ footer {
   .hero-logo-badge { width: clamp(220px, 32vw, 360px); }
   .beers-scroll { padding-left: 2rem; padding-right: 2rem; }
   .seasons-grid { grid-template-columns: repeat(2, 1fr); }
-  .story-grid, .taproom-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .story-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .taproom-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .taproom-features { grid-column: span 2; }
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
   .events-grid { grid-template-columns: 1fr 1fr; }
   .story-section::after { font-size: clamp(8rem, 16vw, 20rem); }
@@ -1938,7 +1982,10 @@ footer {
   .beer-card:nth-child(3n) { transform: none; } /* kill rotation on mobile */
 
   /* Taproom */
-  .taproom-features { padding: 2rem 1.5rem; }
+  /* Taproom — stack all 3 on mobile */
+  .taproom-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .taproom-features { grid-column: auto; padding: 2rem 1.5rem; }
+  .taproom-header { margin-bottom: 2rem; }
 
   /* Events */
   .events-grid { grid-template-columns: 1fr; }
@@ -2342,59 +2389,58 @@ footer {
 <!-- TAPROOM -->
 <section class="taproom-section" id="taproom">
   <div class="wrap">
+    <div class="taproom-header fade-up">
+      <div class="eyebrow dark">Find Us</div>
+      <h2 class="section-title dark">Pull Up <em>a Stool</em></h2>
+      <p class="taproom-intro">Main Street, Windham. Four minutes from the Windham Mountain base lodge. The fire's on, the dogs are welcome, and the draft list goes ten deep.</p>
+    </div>
+
     <div class="taproom-grid">
-      <div class="fade-up">
-        <div class="eyebrow dark">Find Us</div>
-        <h2 class="section-title dark">Pull Up<br><em>a Stool</em></h2>
-
-        <p class="taproom-intro">Main Street, Windham. Four minutes from the Windham Mountain base lodge. The fire's on, the dogs are welcome, and the draft list goes ten deep.</p>
-
-        <div class="drive-times">
-          <div class="drive-time">
-            <div class="drive-time-label">From NYC</div>
-            <div class="drive-time-val">2h 45m</div>
-            <div class="drive-time-sub">via I-87 N</div>
-          </div>
-          <div class="drive-time">
-            <div class="drive-time-label">From Windham Mtn</div>
-            <div class="drive-time-val">4 min</div>
-            <div class="drive-time-sub">base lodge</div>
-          </div>
-          <div class="drive-time">
-            <div class="drive-time-label">From Hunter Mtn</div>
-            <div class="drive-time-val">20 min</div>
-            <div class="drive-time-sub">via Rt 296</div>
-          </div>
+      <div class="drive-times fade-up stagger-1">
+        <div class="drive-time">
+          <div class="drive-time-label">From NYC</div>
+          <div class="drive-time-val">2h 45m</div>
+          <div class="drive-time-sub">via I-87 N</div>
         </div>
-
-        <div class="hours-card">
-          <div class="hours-title">Hours</div>
-          <div class="hours-row">
-            <span class="hours-day">Mon – Wed</span>
-            <span class="hours-time hours-closed">Closed</span>
-          </div>
-          <div class="hours-row">
-            <span class="hours-day">Thursday</span>
-            <span class="hours-time">3:00 pm – 9:00 pm</span>
-          </div>
-          <div class="hours-row">
-            <span class="hours-day">Fri &amp; Sat</span>
-            <span class="hours-time">12:00 pm – 9:00 pm</span>
-          </div>
-          <div class="hours-row">
-            <span class="hours-day">Sunday</span>
-            <span class="hours-time">12:00 pm – 6:00 pm</span>
-          </div>
-          <div class="address-block">
-            <div class="address-label">Address</div>
-            <div class="address-text">5351 Main Street<br>Windham, New York</div>
-            <div class="address-phone">(518) 734-3133</div>
-            <a href="https://maps.google.com/?q=5351+Main+Street+Windham+NY" target="_blank" class="directions-btn">Find us in Windham</a>
-          </div>
+        <div class="drive-time">
+          <div class="drive-time-label">From Windham Mtn</div>
+          <div class="drive-time-val">4 min</div>
+          <div class="drive-time-sub">base lodge</div>
+        </div>
+        <div class="drive-time">
+          <div class="drive-time-label">From Hunter Mtn</div>
+          <div class="drive-time-val">20 min</div>
+          <div class="drive-time-sub">via Rt 296</div>
         </div>
       </div>
 
-      <div class="taproom-features fade-up stagger-2">
+      <div class="hours-card fade-up stagger-2">
+        <div class="hours-title">Hours</div>
+        <div class="hours-row">
+          <span class="hours-day">Mon – Wed</span>
+          <span class="hours-time hours-closed">Closed</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Thursday</span>
+          <span class="hours-time">3:00 – 9:00 pm</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Fri &amp; Sat</span>
+          <span class="hours-time">12:00 – 9:00 pm</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time">12:00 – 6:00 pm</span>
+        </div>
+        <div class="address-block">
+          <div class="address-label">Address</div>
+          <div class="address-text">5351 Main Street<br>Windham, New York</div>
+          <div class="address-phone">(518) 734-3133</div>
+          <a href="https://maps.google.com/?q=5351+Main+Street+Windham+NY" target="_blank" class="directions-btn">Find us in Windham</a>
+        </div>
+      </div>
+
+      <div class="taproom-features fade-up stagger-3">
         <div class="taproom-feature">
           <div class="taproom-feature-title">Four minutes from the lift</div>
           <div class="taproom-feature-body">Boots off, pint in hand, before your legs remember how tired they are.</div>
