@@ -321,7 +321,7 @@ nav.scrolled {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.75rem;
+  gap: 2.5rem;
   overflow: hidden;
   background-color: #1C3F47;
   background-image:
@@ -407,7 +407,7 @@ nav.scrolled {
   letter-spacing: -0.02em;
   display: block;
   font-size: 0.78em;
-  margin-top: 0.55em;
+  margin-top: 0.7em;
   /* Subtle animated golden shine */
   background: linear-gradient(
     100deg,
@@ -2037,7 +2037,13 @@ footer {
 /* Responsive */
 /* ─── TABLET ─── */
 @media (max-width: 1100px) {
-  .hero { min-height: auto; padding: 120px 2rem 100px; gap: 1.5rem; }
+  .hero { min-height: auto; padding: 120px 2rem 100px; gap: 2rem; }
+  /* iPad-size nav tightening */
+  nav { padding: 0 1.5rem; height: 68px; }
+  .nav-logo-img { height: 46px; }
+  .nav-links { gap: 1.25rem; }
+  .nav-links a:not(.nav-cta) { font-size: 0.7rem; letter-spacing: 0.16em; }
+  .nav-cta { padding: 0.55rem 0.95rem; font-size: 0.7rem; letter-spacing: 0.14em; }
   .beers-scroll { padding-left: 2rem; padding-right: 2rem; }
   .seasons-grid { grid-template-columns: repeat(2, 1fr); }
   .story-grid { grid-template-columns: 1fr; gap: 3.5rem; }
@@ -2192,7 +2198,7 @@ footer {
       Cold Beer. Big Peaks. <em>Worth the drive.</em>
     </h1>
     <p class="hero-sub" data-reveal="up" data-delay="3">
-      A family brewery steps from the slopes and minutes from the trails. Pull up a stool — the King is pouring.
+      Mountain King Brewing Co. — a family brewery in Windham, NY. Steps from the slopes, minutes from the trails. Pull up a stool; the King is pouring.
     </p>
 
     <div class="hero-ctas" data-reveal="up" data-delay="4">
