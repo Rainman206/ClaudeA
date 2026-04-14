@@ -432,11 +432,12 @@ nav.scrolled {
   font-family: var(--f-sans);
   font-weight: 500;
   font-size: 1.05rem;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--text-dim);
-  max-width: 52ch;
+  max-width: 58ch;
   margin: 0;
   text-align: center;
+  text-wrap: balance;
 }
 
 .hero-ctas {
@@ -2076,7 +2077,7 @@ footer {
   .hero-tagline { font-size: clamp(2.4rem, 10vw, 3.8rem); max-width: 14ch; }
   .hero-tagline em { font-size: 0.78em; margin-top: 0.4em; }
   .hero-pines { height: 100px; }
-  .hero-sub { font-size: 0.98rem; line-height: 1.55; }
+  .hero-sub { font-size: 0.96rem; line-height: 1.5; max-width: 36ch; }
   .hero-ctas { flex-direction: column; gap: 0.55rem; width: 100%; max-width: 280px; }
   .hero-ctas .btn { text-align: center; justify-content: center; }
   .hero-quote { font-size: 0.85rem; padding-top: 1rem; }
@@ -2145,7 +2146,7 @@ footer {
 
 /* ─── SMALL MOBILE ─── */
 @media (max-width: 480px) {
-  .hero { padding: 110px 1.25rem 90px; gap: 1.25rem; }
+  .hero { padding: 110px 1.25rem 90px; gap: 1.75rem; }
   .hero-tagline { font-size: clamp(2.2rem, 11vw, 3rem); max-width: 12ch; }
   .hero-tagline em { font-size: 0.82em; }
   .seasons-grid { grid-template-columns: 1fr; }
@@ -2198,7 +2199,7 @@ footer {
       Cold Beer. Big Peaks. <em>Worth the drive.</em>
     </h1>
     <p class="hero-sub" data-reveal="up" data-delay="3">
-      Mountain King Brewing Co. — a family brewery in Windham, NY. Steps from the slopes, minutes from the trails. Pull up a stool; the King is pouring.
+      Mountain King Brewing Co. — a family brewery in Windham, NY, steps from the slopes and minutes from the trails.
     </p>
 
     <div class="hero-ctas" data-reveal="up" data-delay="4">
